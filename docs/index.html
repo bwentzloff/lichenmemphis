@@ -367,7 +367,7 @@
   <h1>Lichen Environmental Metrics by Year</h1>
   <p>Area: Shelby County, Tennessee area</p>
   <p>Source generated at (UTC): 2026-06-04T16:53:34.737772+00:00</p>
-  <p>Report created at (UTC): 2026-06-04T21:23:00.281535+00:00</p>
+  <p>Report created at (UTC): 2026-06-04T21:27:44.470726+00:00</p>
 </header>
 <main>
 <section class="info-box">
@@ -839,19 +839,26 @@
       function renderMarkers(minYear, maxYear, selectedGroups, selectedSpecies) {
         markerLayer.clearLayers();
         let shown = 0;
+        const groupColorMap = {
+          fungi: '#1d4ed8',
+          lichen: '#0f766e',
+          slime_molds: '#b45309',
+          mosses: '#5b21b6'
+        };
 
         observationPoints.forEach(function (point) {
           if (!pointMatchesFilters(point, minYear, maxYear, selectedGroups, selectedSpecies)) {
             return;
           }
           shown += 1;
+          const markerColor = groupColorMap[point.group] || '#0b7285';
 
           const marker = L.circleMarker([point.lat, point.lng], {
             radius: 4,
-            color: '#0b7285',
+            color: markerColor,
             weight: 1,
             opacity: 0.85,
-            fillColor: '#1098ad',
+            fillColor: markerColor,
             fillOpacity: 0.65
           });
 
