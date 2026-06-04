@@ -367,7 +367,7 @@
   <h1>Lichen Environmental Metrics by Year</h1>
   <p>Area: Shelby County, Tennessee area</p>
   <p>Source generated at (UTC): 2026-06-04T16:53:34.737772+00:00</p>
-  <p>Report created at (UTC): 2026-06-04T21:27:44.470726+00:00</p>
+  <p>Report created at (UTC): 2026-06-04T21:38:13.058198+00:00</p>
 </header>
 <main>
 <section class="info-box">
@@ -859,7 +859,16 @@
             weight: 1,
             opacity: 0.85,
             fillColor: markerColor,
-            fillOpacity: 0.65
+            fillOpacity: 0.65,
+            interactive: false
+          });
+          const hitMarker = L.circleMarker([point.lat, point.lng], {
+            radius: 12,
+            color: markerColor,
+            weight: 0,
+            opacity: 0,
+            fillColor: markerColor,
+            fillOpacity: 0
           });
 
           const species = escapeHtml(point.species || 'Unknown species');
@@ -869,8 +878,10 @@
           const details = point.uri
             ? '<br><a href="' + escapeHtml(point.uri) + '" target="_blank" rel="noopener noreferrer">Open observation</a>'
             : '';
-          marker.bindPopup('<strong>' + species + '</strong><br>Group: ' + groupLabel + '<br>Year: ' + point.year + '<br>Observed on: ' + observedOn + details);
+          const popupHtml = '<strong>' + species + '</strong><br>Group: ' + groupLabel + '<br>Year: ' + point.year + '<br>Observed on: ' + observedOn + details;
+          hitMarker.bindPopup(popupHtml);
           marker.addTo(markerLayer);
+          hitMarker.addTo(markerLayer);
         });
 
         mapStatus.textContent = 'Showing ' + shown + ' observations for ' + minYear + ' to ' + maxYear + '.';
