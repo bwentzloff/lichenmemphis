@@ -307,7 +307,7 @@ def render_map_section(min_year: int, max_year: int) -> str:
 
 def render_graph_filters_section(min_year: int, max_year: int) -> str:
     parts: list[str] = []
-    parts.append('<details class="graph-filters">')
+    parts.append('<details class="graph-filters" open>')
     parts.append("  <summary>Map Filters ⌄</summary>")
     parts.append("  <div class=\"graph-filter-stack\">")
     parts.append("    <p>Use these filters to control the map below.</p>")
