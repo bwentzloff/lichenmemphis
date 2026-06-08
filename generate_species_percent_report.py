@@ -371,6 +371,19 @@ def render_info_box() -> str:
         ]
     )
 
+def render_caution_box() -> str:
+    info_html = (
+        "<p>At this time, there are very few lichen data points and all of the data is currently user submitted. Therefore, this data should <em>only</em> be used as inspiration for further research and not for drawing conclusions.</p>"
+    )
+    return "\n".join(
+        [
+            "<section class=\"caution-box\">",
+            "  <h2>Caution</h2>",
+            f"  {info_html}",
+            "</section>",
+        ]
+    )
+
 
 def render_observation_count_graph(
     group_observations_by_year: dict[str, dict[int, int]],
@@ -511,6 +524,7 @@ def build_html(
 
     min_year, max_year = year_bounds
     sections = [
+        render_caution_box(),
         render_info_box(),
         render_graph_filters_section(min_year, max_year),
         render_map_section(min_year, max_year),
@@ -580,6 +594,11 @@ def build_html(
             "      border-left: 6px solid var(--accent);",
             "      background: #f5fcfd;",
             "    }",
+            "    .caution-box {",
+            "      border-left: 6px solid red;",
+            "      background: #ffe5e5;",
+            "    }",
+
             "    .graph-filters {",
             "      background: var(--panel);",
             "      border: 1px solid var(--border);",
